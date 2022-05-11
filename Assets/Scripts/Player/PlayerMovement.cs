@@ -4,62 +4,73 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //gets
-    [SerializeField] private Logger _logger;
-    private Rigidbody _rb;
-    private Animator _animator;
+    [SerializeField] Logger _logger;
 
-    //movement's type bool
-    [HideInInspector] public bool Walk;
+    Rigidbody _rb;
+    Animator _anim;
 
-    //variables
-    [SerializeField] [Range(0f, 100.0f)] private float _moveSpeed;
-    [SerializeField] [Range(0.0f, 0.5f)] private float _rotationFacingSpeed;
-    private Vector3 _dir = new Vector3();
-    float x, y;
+    [Range(0f, 100.0f)] public float MoveSpeed;
+    [Range(0.0f, 0.5f)] public float RotationFacingSpeed;
 
-    private void Start()
+    Vector3 _dir = new Vector3();
+    float _x, _y;
+
+    void Start()
     {
-        if (GetComponent<Rigidbody>()!=null)
-            _rb = GetComponent<Rigidbody>();
-        if (GetComponent<Animator>() != null)
-            _animator = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody>();
+        _anim = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
         Inputs();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         Walking();
     }
 
-    private void Inputs()
+    void Inputs()
     {
-        x = Input.GetAxis("Horizontal");
-        y = Input.GetAxis("Vertical");
-        _dir = new Vector3(x, 0, y);
+        //inputs
+        if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Standing"))
+        {
+            _x = Input.GetAxis("Horizontal");
+            _y = Input.GetAxis("Vertical");
+        }
+
+        //direction
+        _dir = new Vector3(_x, 0, _y);
         _dir.Normalize();
-        _logger.Log($"x = {x}, y = {y}", this);
+
+        _logger.Log($"x = {_x}, y = {_y}", this);
     }
 
-    private void Walking()
+    void Walking()
     {
-        if (Mathf.Abs(x) > 0.1f || Mathf.Abs(y) > 0.1f)
+        //movement
+        _rb.AddForce(_dir * MoveSpeed);
+
+        //anim
+        float xy = Mathf.Abs(_x) + Mathf.Abs(_y);
+        if (xy > 0.1f)
         {
-            _rb.AddForce(_dir * _moveSpeed);
-            Walk = true;
-            _animator.SetBool("Walk", true);
-            transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(_dir), _rotationFacingSpeed);
+            _anim.SetBool("Walk", true);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_dir), RotationFacingSpeed);
+            if (CheckForwardContact()) _anim.SetBool("Push", true);
+            else _anim.SetBool("Push", false);
         }
         else
         {
-            _rb.velocity = Vector3.zero;
-            _rb.angularVelocity = Vector3.zero;
-            Walk = false;
-            _animator.SetBool("Walk", false);
+            _anim.SetBool("Push", false);
+            _anim.SetBool("Walk", false);
         }
+
+    }
+
+    bool CheckForwardContact()
+    {
+        return (Physics.Raycast(transform.position, transform.forward, .5f, 1));
     }
 }
