@@ -186,6 +186,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6057140222963153312, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: c92a1e2e568f7314a86a87a6eb51f431, type: 2}
     - target: {fileID: -4216859302048453862, guid: 82a2914d8f86c62488456950c8330e38, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -1864,8 +1868,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _logger: {fileID: 420570947}
   Walk: 0
-  _moveSpeed: 15
-  _rotationFacingSpeed: 0.05
+  _moveSpeed: 50
+  _rotationFacingSpeed: 0.142
 --- !u!136 &2078767560
 CapsuleCollider:
   m_ObjectHideFlags: 0
