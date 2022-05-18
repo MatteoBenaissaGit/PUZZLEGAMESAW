@@ -1,0 +1,16 @@
+# Blender v3.1.2 OBJ File: 'puzzle g.blend'
+# www.blender.org
+mtllib Sol_Bibliothèque.mtl
+o Sol_Bibliothèque_Plane.060
+v 3.880961 -0.150792 3.682071
+v 13.633736 -0.150792 3.682071
+v 3.880961 -0.150792 -3.469963
+v 13.633736 -0.150792 -3.469963
+vt 1.206435 0.885174
+vt -0.206435 0.885174
+vt -0.206435 -0.150931
+vt 1.206435 -0.150931
+vn 0.0000 1.0000 0.0000
+usemtl Material.008
+s off
+f 1/1/1 2/2/1 4/3/1 3/4/1
