@@ -4,28 +4,48 @@ using UnityEngine;
 
 public class FlashLight : MonoBehaviour
 {
-    public GameObject SpotLight;
+    [SerializeField] private Camera _mainCamera;
 
-    public Vector3 worldPosition;
-    Plane plane = new Plane(Vector3.up, 0);
-    /*
+    private bool _canBlink;
+    private bool _count;
+
     private void Start()
     {
-        Input.mousePosition = new Vector3(Screen.height / 2, Screen.width / 2);
-    }*/
-    void Update()
+        Cursor.visible = false;
+        StartCoroutine(Blink());
+    }
+    private void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane;
-        SpotLight.transform.position = Camera.main.ScreenToWorldPoint(mousePos);
+        FollowCursor();
+    }
 
+    public void FollowCursor()
+    {
+        Vector3 mouseWorldPosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.y = 7.5f;
+        transform.position = mouseWorldPosition;
+    }
 
-        /*float distance;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (plane.Raycast(ray, out distance))
-        {
-            worldPosition = ray.GetPoint(distance);
-            SpotLight.transform.position = worldPosition;*/
+    IEnumerator Waiting()
+    {
+        yield return new WaitForSeconds(6);
         
+    }
+    IEnumerator Blink()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Light>().intensity = 0;
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<Light>().intensity = 100;
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<Light>().intensity = 0; 
+        yield return new WaitForSeconds(0.05f);
+        GetComponent<Light>().intensity = 100;
+        yield return new WaitForSeconds(0.2f);
+        GetComponent<Light>().intensity = 0;
+        yield return new WaitForSeconds(0.7f);
+        GetComponent<Light>().intensity = 100;
+        yield return new WaitForSeconds(6);
+        StartCoroutine(Blink());
     }
 }
