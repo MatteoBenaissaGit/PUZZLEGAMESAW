@@ -121,6 +121,8 @@ public class PlayerMovement : MonoBehaviour
                 if (offset == Vector3.zero) offset = transform.position - hit.collider.gameObject.transform.position;
                 if (_pulledObject.GetComponent<Rigidbody>() != null)
                 {
+                    _pulledObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    _pulledObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
                     _pulledObject.GetComponent<Rigidbody>().isKinematic = true;
                     _pulledObject.transform.SetParent(this.gameObject.transform);
                 }
@@ -131,7 +133,12 @@ public class PlayerMovement : MonoBehaviour
             //reset pulled object & player's anim
             if (_pulledObject != null)
             {
-                if (_pulledObject.GetComponent<Rigidbody>() != null) _pulledObject.GetComponent<Rigidbody>().isKinematic = false;
+                if (_pulledObject.GetComponent<Rigidbody>() != null)
+                {
+                    _pulledObject.GetComponent<Rigidbody>().isKinematic = false;
+                    print("yes");
+                    _pulledObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ ;
+                }
                 _pulledObject.transform.SetParent(null); _pulledObject = null;
             }
             _anim.SetBool("Pull", false); _pull = false;
