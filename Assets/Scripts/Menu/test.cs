@@ -56,6 +56,7 @@ public class test : MonoBehaviour
                 transform.LookAt(target[2]);
                 _canMove = true;
                 StartCoroutine(Moving());
+
             }
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -107,6 +108,7 @@ public class test : MonoBehaviour
             }
         }
 
+        //ActualPos = 4
         if(actualPos == 4)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -122,8 +124,7 @@ public class test : MonoBehaviour
 
     IEnumerator Moving()
     {
-        yield return new WaitForSeconds(0);
-        //yield return new WaitForSeconds(2);
-        //_canMove = false;
+        yield return new WaitForSeconds(3);
+        _canMove = false;
     }
 }
