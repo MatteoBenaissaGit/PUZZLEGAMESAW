@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Logger _logger;
 
     [Header("Character's physic variables")]
     [Space(10)]
@@ -73,8 +72,6 @@ public class PlayerMovement : MonoBehaviour
             else _dir = Vector3.zero;
         }
         _dir.Normalize();
-
-        _logger.Log($"x = {_x}, y = {_y}", this);
     }
 
     void Moving()
