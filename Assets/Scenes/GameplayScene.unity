@@ -3664,6 +3664,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4271836223127852932, guid: e3a2f110da04f934d977a219b2c0cd74, type: 3}
+      propertyPath: Character
+      value: 
+      objectReference: {fileID: 2078767558}
+    - target: {fileID: 4271836223127852932, guid: e3a2f110da04f934d977a219b2c0cd74, type: 3}
+      propertyPath: ArrowLauncher
+      value: 
+      objectReference: {fileID: 360057916}
     - target: {fileID: 4271836223127852935, guid: e3a2f110da04f934d977a219b2c0cd74, type: 3}
       propertyPath: m_RootOrder
       value: 12

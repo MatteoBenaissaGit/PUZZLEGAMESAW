@@ -3,39 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : ClassActivator
 {
-    public bool IsPressured;
+    [Header("Pressure Plate Parameters")]
+    [Space(10)]
     public float MovementHeight, MovementDuration;
     float BaseY;
+    bool _isTrigger;
 
     private void Start()
     {
         BaseY = transform.position.y;
+        IsActive = false;
     }
 
     private void Update()
     {
-        if (CheckTopContact() && !IsPressured)
+        PressureCheck();
+    }
+
+    void PressureCheck()
+    {
+        if (CheckTopContact() && !_isTrigger)
+        {
             Activate();
-        if (!CheckTopContact() && IsPressured)
-            Desactivate();
+            Anim();
+        }
+        if (!CheckTopContact() && _isTrigger)
+        {
+            Anim();
+            Activate();
+        }
     }
 
-    void Activate()
+    void Anim()
     {
-        transform.DOMoveY(BaseY - MovementHeight, MovementDuration);
-        IsPressured = true;
-    }
-
-    void Desactivate()
-    {
-        transform.DOMoveY(BaseY, MovementDuration);
-        IsPressured = false;
+        if (!_isTrigger)
+        {
+            transform.DOMoveY(BaseY - MovementHeight, MovementDuration);
+            _isTrigger = true;
+        }
+        else
+        {
+            transform.DOMoveY(BaseY, MovementDuration);
+            _isTrigger = false;
+        }
     }
 
     bool CheckTopContact()
     {
-        return (Physics.Raycast(transform.position, new Vector3(0,1,0), 1f, 1));
+        return (Physics.Raycast(transform.position, new Vector3(0, 1, 0), 1f, 1));
     }
 }
