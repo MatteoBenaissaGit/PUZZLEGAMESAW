@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1988150051299464479}
   - component: {fileID: 2026033300032198828}
-  - component: {fileID: 2026033300032198829}
   - component: {fileID: 2026033300032198830}
+  - component: {fileID: 30597523855223901}
   m_Layer: 0
   m_Name: ArrowLauncher
   m_TagString: Untagged
@@ -48,20 +48,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 29.85101, y: 1, z: 0.30022982}
   m_Center: {x: -14.4255, y: 0, z: -0.0066419835}
---- !u!64 &2026033300032198829
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214990432880119717}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
 --- !u!114 &2026033300032198830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +67,21 @@ MonoBehaviour:
   SpawnPoint: {fileID: 8078403694092963473}
   ArrowSpeed: 1
   ShootingRate: 1
+  LaserWidth: 0
+  LaserColor: 0
+--- !u!65 &30597523855223901
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214990432880119717}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.88, y: 2.69, z: 2.43}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6151624512333683941
 GameObject:
   m_ObjectHideFlags: 0
