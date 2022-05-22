@@ -9,6 +9,7 @@ public class ArrowLauncher : MonoBehaviour
     float _timer = 0;
     Collider _characterCollider;
     LineRenderer _lineRenderer;
+    Collider _laserCollider;
 
     [Header("Referencing")]
     [Space(10)]
@@ -34,14 +35,15 @@ public class ArrowLauncher : MonoBehaviour
     private void Update()
     {
         CharacterDetector();
-        ResetArrowLine();
+        if (IsActivated)
+            ResetArrowLine();
     }
 
     void CharacterDetector()
     {
         //timer & arrow launching management
         _timer--;
-        if (IsActivated && IsTriggered && _timer <= 0 && Character.GetComponent<PlayerLife>().IsAlive)
+        if (IsActivated && IsTriggered && _timer <= 0 && Character.GetComponent<PlayerLife>().IsAlive && _laserCollider == Character.GetComponent<Collider>())
         {
             LaunchArrow();
             float framerate = 1.0f / Time.deltaTime;
@@ -85,6 +87,8 @@ public class ArrowLauncher : MonoBehaviour
         _lineRenderer.endWidth = LaserWidth;
         _lineRenderer.positionCount = 2;
         _lineRenderer.useWorldSpace = true;
+        Material whiteDiffuseMat = new Material(Shader.Find("Unlit/Texture"));
+        _lineRenderer.material = whiteDiffuseMat;
 
         //drawing line in the world space
         _lineRenderer.SetPosition(0, transform.position);
@@ -93,12 +97,27 @@ public class ArrowLauncher : MonoBehaviour
         if (Physics.Raycast(transform.position, rayDirection, out hit))
         {
             _lineRenderer.SetPosition(1, hit.point);
+            _laserCollider = hit.collider;
         }
     }
 
     void ResetArrowLine()
     {
-        Destroy(_lineRenderer.gameObject);
-        ArrowLine();
+        if (_lineRenderer != null)
+            Destroy(_lineRenderer.gameObject);
+        if (IsActivated)
+            ArrowLine();
+    }
+
+    public void Desactivate()
+    {
+        IsActivated = false;
+        ResetArrowLine();
+    }
+
+    public void Activate()
+    {
+        IsActivated = true;
+        ResetArrowLine();
     }
 }
