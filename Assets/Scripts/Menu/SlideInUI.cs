@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class SliderIn : MonoBehaviour
+public class SlideInUI : MonoBehaviour
 {
     private void Update()
     {
-        transform.DOLocalMove(new Vector3(4000, 1, 0), 1.5f);
+        transform.DOLocalMove(new Vector3(4500, 1, 0), 1.5f);
     }
 }

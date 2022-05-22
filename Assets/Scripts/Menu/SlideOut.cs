@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 
-public class SlideTransition : MonoBehaviour
+public class SlideOut : MonoBehaviour
 {
     private void Update()
     {

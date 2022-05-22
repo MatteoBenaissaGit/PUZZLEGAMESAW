@@ -12,6 +12,7 @@ public class PlayerLife : MonoBehaviour
     [Tooltip("---EN \n Time it takes to reset scene after player's death \n ---FR \n Le temps que met le jeu a reset la scene à la mort du joueur")]
     [Range(0,10)] public int TimeToDie;
 
+    public GameObject slider;
     private void Update()
     {
         LifeChecking();
@@ -30,6 +31,8 @@ public class PlayerLife : MonoBehaviour
     IEnumerator CharacterDies()
     {
         yield return new WaitForSeconds(TimeToDie);
+        slider.SetActive(true);
+        yield return new WaitForSeconds(2);
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name); 
     }
