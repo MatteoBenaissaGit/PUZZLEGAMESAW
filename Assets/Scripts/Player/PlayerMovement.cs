@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Logger _logger;
 
     [Header("Character's physic variables")]
     [Space(10)]
@@ -73,8 +72,6 @@ public class PlayerMovement : MonoBehaviour
             else _dir = Vector3.zero;
         }
         _dir.Normalize();
-
-        _logger.Log($"x = {_x}, y = {_y}", this);
     }
 
     void Moving()
@@ -95,8 +92,15 @@ public class PlayerMovement : MonoBehaviour
         {
             _anim.SetBool("Walk", true);
             if (!_pull) transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_dir), RotationFacingSpeed);
-            if (CheckForwardContact()) { _anim.SetBool("Push", true); _push = true; }
-            else { _anim.SetBool("Push", false); _push = false; }
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit))
+            {
+                if (hit.collider.tag != "PressurePlate") //dont push if its the pressure plate collider
+                {
+                    if (CheckForwardContact()) { _anim.SetBool("Push", true); _push = true; }
+                    else { _anim.SetBool("Push", false); _push = false; }
+                }
+            }
         }
         else
         {
@@ -142,7 +146,6 @@ public class PlayerMovement : MonoBehaviour
 
     bool CheckForwardContact()
     {
-        //raycast in front of player
         return (Physics.Raycast(transform.position, transform.forward, .5f, 1));
     }
 }

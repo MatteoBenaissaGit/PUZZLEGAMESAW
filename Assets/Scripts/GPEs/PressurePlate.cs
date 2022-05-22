@@ -10,6 +10,7 @@ public class PressurePlate : ClassActivator
     public float MovementHeight, MovementDuration;
     float BaseY;
     bool _isTrigger;
+    bool _topContact;
 
     private void Start()
     {
@@ -22,14 +23,23 @@ public class PressurePlate : ClassActivator
         PressureCheck();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        _topContact = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        _topContact = false;
+    }
+
     void PressureCheck()
     {
-        if (CheckTopContact() && !_isTrigger)
+        if (_topContact && !_isTrigger)
         {
             Activate();
             Anim();
         }
-        if (!CheckTopContact() && _isTrigger)
+        if (!_topContact && _isTrigger)
         {
             Anim();
             Activate();
@@ -48,10 +58,5 @@ public class PressurePlate : ClassActivator
             transform.DOMoveY(BaseY, MovementDuration);
             _isTrigger = false;
         }
-    }
-
-    bool CheckTopContact()
-    {
-        return (Physics.Raycast(transform.position, new Vector3(0, 1, 0), 1f, 1));
     }
 }
