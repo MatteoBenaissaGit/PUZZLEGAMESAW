@@ -852,11 +852,11 @@ PrefabInstance:
     - target: {fileID: 11415212, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: bookPages.Array.data[0]
       value: 
-      objectReference: {fileID: 21300000, guid: a37d63110fe11cf41bb8e1c0d3c3326e, type: 3}
+      objectReference: {fileID: 21300000, guid: 642bbb5982e6a1144af574fde49d4889, type: 3}
     - target: {fileID: 11415212, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: bookPages.Array.data[1]
       value: 
-      objectReference: {fileID: 21300000, guid: a37d63110fe11cf41bb8e1c0d3c3326e, type: 3}
+      objectReference: {fileID: 21300000, guid: b354dd975563cd94b8fd045794cd2887, type: 3}
     - target: {fileID: 11415212, guid: fe9bfb5044c0cc646baba1ad7d354100, type: 3}
       propertyPath: bookPages.Array.data[2]
       value: 
