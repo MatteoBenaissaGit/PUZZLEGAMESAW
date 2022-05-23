@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class test : MonoBehaviour
+public class PlayerSelectLevel : MonoBehaviour
 {
     public Transform[] target;
     public int actualPos;
@@ -15,6 +15,12 @@ public class test : MonoBehaviour
 
     public GameObject slider;
 
+    public int levelUnlock;
+
+    private void Awake()
+    {
+        levelUnlock = GameData.levelUnlock;
+    }
     private void Start()
     {
         canMove = true;
@@ -40,7 +46,7 @@ public class test : MonoBehaviour
         }
         if (actualPos == 1)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && canMove == true)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && canMove == true && levelUnlock >= 3)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -82,7 +88,7 @@ public class test : MonoBehaviour
                 StartCoroutine(Waiting());
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) && actu2 == false && canMove == true)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && actu2 == false && canMove == true && levelUnlock >= 5)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -169,7 +175,6 @@ public class test : MonoBehaviour
         canMove = true;
         _anim.SetBool("isMouving", false);
     }
-    #endregion
 
     IEnumerator Switch()
     {
@@ -182,4 +187,5 @@ public class test : MonoBehaviour
         if (actualPos == 4)
             SceneManager.LoadScene(2);
     }
+    #endregion
 }
