@@ -10,6 +10,8 @@ public class ArrowLauncher : MonoBehaviour
     Collider _characterCollider;
     LineRenderer _lineRenderer;
     Collider _laserCollider;
+    Vector3 rayDirection;
+
 
     [Header("Referencing")]
     [Space(10)]
@@ -28,6 +30,7 @@ public class ArrowLauncher : MonoBehaviour
 
     private void Start()
     {
+        rayDirection = transform.TransformDirection(Vector3.forward + new Vector3(-90, 0, 0));
         _characterCollider = Character.GetComponent<Collider>();
         ArrowLine();
     }
@@ -57,7 +60,7 @@ public class ArrowLauncher : MonoBehaviour
         GameObject arrow = Instantiate(Arrow);
         arrow.GetComponent<ArrowScript>().MovementSpeed = ArrowSpeed;
         arrow.transform.position = SpawnPoint.transform.position;
-        arrow.GetComponent<ArrowScript>().DirectionForward = transform.forward + new Vector3(-90, 0, 0);
+        arrow.GetComponent<ArrowScript>().DirectionForward = rayDirection;
         arrow.GetComponent<ArrowScript>().Character = Character;
     }
 
@@ -93,7 +96,6 @@ public class ArrowLauncher : MonoBehaviour
         //drawing line in the world space
         _lineRenderer.SetPosition(0, transform.position);
         RaycastHit hit;
-        Vector3 rayDirection = transform.TransformDirection(transform.forward) + new Vector3(-90, 0, 0);
         if (Physics.Raycast(transform.position, rayDirection, out hit))
         {
             _lineRenderer.SetPosition(1, hit.point);
