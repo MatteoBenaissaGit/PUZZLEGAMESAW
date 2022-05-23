@@ -47,7 +47,7 @@ public class Disjoncteur : ClassActivator
 
     void PushCheck()
     {
-        if (_isTrigger && Input.GetButtonDown("ButtonActivation"))
+        if (_isTrigger && (Input.GetButtonDown("ButtonActivation")||Input.GetKeyDown(KeyCode.E)) )
             Pushed();
     }
 
