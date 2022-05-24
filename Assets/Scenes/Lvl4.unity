@@ -6797,7 +6797,7 @@ PrefabInstance:
     - target: {fileID: 1695281357936119181, guid: ce23e365637ac274f8473a27ece849e1, type: 3}
       propertyPath: Character
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 58115703}
     - target: {fileID: 2632614035403022879, guid: ce23e365637ac274f8473a27ece849e1, type: 3}
       propertyPath: m_Name
       value: EXIT
