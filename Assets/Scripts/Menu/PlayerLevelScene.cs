@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerSelectLevel : MonoBehaviour
+public class PlayerLevelScene : MonoBehaviour
 {
     public Transform[] target;
     public int actualPos;
@@ -17,6 +17,13 @@ public class PlayerSelectLevel : MonoBehaviour
 
     public int levelUnlock;
 
+    public GameObject cacheUISdb;
+    public GameObject cacheUIBiblio;
+
+    public GameObject UISalon;
+    public GameObject UISdb;
+    public GameObject UIBiblio;
+
     private void Awake()
     {
         levelUnlock = GameData.levelUnlock;
@@ -29,6 +36,13 @@ public class PlayerSelectLevel : MonoBehaviour
 
     void Update()
     {
+        //For test
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            levelUnlock++;
+        }
+        //End
+
         float step = 3 * Time.deltaTime;
 
         #region Input
@@ -46,7 +60,7 @@ public class PlayerSelectLevel : MonoBehaviour
         }
         if (actualPos == 1)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && canMove == true && levelUnlock >= 3)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -88,7 +102,7 @@ public class PlayerSelectLevel : MonoBehaviour
                 StartCoroutine(Waiting());
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) && actu2 == false && canMove == true && levelUnlock >= 5)
+            if (Input.GetKeyDown(KeyCode.UpArrow) && actu2 == false && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -146,18 +160,32 @@ public class PlayerSelectLevel : MonoBehaviour
         }
         #endregion
 
-        #region EnterInLevel
-        if (actualPos == 1 && canMove == true && Input.GetKeyDown(KeyCode.Return))
+        #region UISelection
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            StartCoroutine(Switch());
+            UIBiblio.SetActive(false);
+            UISalon.SetActive(false);
+            UISdb.SetActive(false);
+            canMove = true;
+        }
+
+        if (actualPos == 1 && canMove == true && levelUnlock >= 5 && Input.GetKeyDown(KeyCode.Return))
+        {
+            canMove = false;
+            cacheUIBiblio.SetActive(false);
+            UIBiblio.SetActive(true);
         }
         if (actualPos == 3 && canMove == true && Input.GetKeyDown(KeyCode.Return))
         {
-            StartCoroutine(Switch());
+            canMove = false;
+            UISalon.SetActive(true);
         }
-        if (actualPos == 4 && canMove == true && Input.GetKeyDown(KeyCode.Return))
+        if (actualPos == 4 && canMove == true && levelUnlock >= 3 && Input.GetKeyDown(KeyCode.Return))
         {
-            StartCoroutine(Switch());
+            canMove = false;
+            cacheUISdb.SetActive(false);
+            UISdb.SetActive(true);
         }
         #endregion
     }
