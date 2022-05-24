@@ -21,6 +21,12 @@ EditorBuildSettings:
     path: Assets/Scenes/LVL3_Ugo.unity
     guid: 82c2160da7a735846b333bf1550d9d16
   - enabled: 1
+    path: Assets/Scenes/Lvl7.unity
+    guid: d6bf8426d88ee4a45bfaaee2146a4524
+  - enabled: 1
+    path: Assets/Scenes/Lvl8.unity
+    guid: 032f01eb0e6ca7243b348392c8404943
+  - enabled: 1
     path: Assets/Scenes/GameplayScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

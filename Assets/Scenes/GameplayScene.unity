@@ -927,11 +927,6 @@ Transform:
   m_Father: {fileID: 385395467}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &911929315 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4539295618541286938, guid: 2e009ec8772e8c64da556da0a6269a07, type: 3}
-  m_PrefabInstance: {fileID: 4539295618915965433}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &951428157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,6 +1459,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300126085}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1532796231 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4539295618200100948, guid: 2e009ec8772e8c64da556da0a6269a07, type: 3}
+  m_PrefabInstance: {fileID: 4539295618915965433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1601602820 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 7988661841721939162, guid: 5da51fa15cfd758439128957fc173c01, type: 3}
@@ -1935,7 +1935,7 @@ PrefabInstance:
     - target: {fileID: 2234390300652904368, guid: 9a188d98d32fbb1499345a68ec50e59a, type: 3}
       propertyPath: Slider
       value: 
-      objectReference: {fileID: 911929315}
+      objectReference: {fileID: 1532796231}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a188d98d32fbb1499345a68ec50e59a, type: 3}
 --- !u!1001 &4271836221459715508
