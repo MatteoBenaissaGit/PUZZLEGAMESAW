@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 public class PlayerLevelScene : MonoBehaviour
 {
     public Transform[] target;
-    public int actualPos;
+    [Range(0, 4)] public int actualPos;
 
     Animator _anim;
 
     public bool canMove;
-    public bool actu2;
+    bool actu2;
 
     public GameObject slider;
 
-    public int levelUnlock;
+    [Range(1, 6)] public int levelUnlock;
     public bool selec;
     public bool canPick;
 
@@ -26,6 +26,7 @@ public class PlayerLevelScene : MonoBehaviour
     public GameObject UISdb;
     public GameObject UIBiblio;
 
+    public GameObject arrow;
     private void Awake()
     {
         levelUnlock = GameData.levelUnlock;
@@ -183,6 +184,7 @@ public class PlayerLevelScene : MonoBehaviour
             UIBiblio.SetActive(false);
             UISalon.SetActive(false);
             UISdb.SetActive(false);
+            arrow.SetActive(false);
             canMove = true;
             selec = false;
             canPick = false;
@@ -198,6 +200,7 @@ public class PlayerLevelScene : MonoBehaviour
             selec = true;
             canMove = false;
             UIBiblio.SetActive(true);
+            arrow.SetActive(true);
             StartCoroutine(Picked());
         }
         if (actualPos == 3 && canMove == true && Input.GetKeyDown(KeyCode.Return))
@@ -205,6 +208,7 @@ public class PlayerLevelScene : MonoBehaviour
             selec = true;
             canMove = false;
             UISalon.SetActive(true);
+            arrow.SetActive(true);
             StartCoroutine(Picked());
         }
         if (actualPos == 4 && canMove == true && levelUnlock >= 3 && Input.GetKeyDown(KeyCode.Return))
@@ -212,6 +216,7 @@ public class PlayerLevelScene : MonoBehaviour
             selec = true;
             canMove = false;
             UISdb.SetActive(true);
+            arrow.SetActive(true);
             StartCoroutine(Picked());
         }
         #endregion
