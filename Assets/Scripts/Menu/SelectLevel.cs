@@ -55,38 +55,84 @@ public class SelectLevel : MonoBehaviour
                 if(playerLevelScene.levelUnlock % 2 == 0)
                 {
                     selected = 2;
-                    
-                    if(playerLevelScene.levelUnlock >= 2)
-                    {
-                        playerLevelScene.arrow.transform.DOMove(new Vector3(1705, 795, 10), timer);
-                        Buttons[0].transform.DOScale(new Vector3(1, 1, 1), timer);
-                        Buttons[1].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
-                    }
+
+                    var sel = playerLevelScene.levelUnlock;
+                    if (playerLevelScene.levelUnlock >= 2)
+                        sel = 1;
                     if (playerLevelScene.levelUnlock >= 4)
-                    {
-                        playerLevelScene.arrow.transform.DOMove(new Vector3(1705, 795, 10), timer);
-                        Buttons[2].transform.DOScale(new Vector3(1, 1, 1), timer);
-                        Buttons[3].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
-                    }
+                        sel = 2;
                     if (playerLevelScene.levelUnlock >= 6)
+                        sel = 3;
+                    switch (sel)
                     {
-                        playerLevelScene.arrow.transform.DOMove(new Vector3(1705, 795, 10), timer);
-                        Buttons[4].transform.DOScale(new Vector3(1, 1, 1), timer);
-                        Buttons[5].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                        default:
+                            break;
+                        case 1:
+                            playerLevelScene.arrow.transform.DOMove(new Vector3(1705, 795, 10), timer);
+                            Buttons[0].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[1].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            break;
+                        case 2:
+                            playerLevelScene.arrow.transform.DOMove(new Vector3(1705, 795, 10), timer);
+                            Buttons[0].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[1].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[2].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[3].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            break;
+                        case 3:
+                            playerLevelScene.arrow.transform.DOMove(new Vector3(1705, 795, 10), timer);
+                            Buttons[0].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[1].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[2].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[3].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[4].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[5].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            break;
                     }
                 }
             }
-                
+
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                selected = 1;
-                playerLevelScene.arrow.transform.DOMove(new Vector3(1380, 795, 10), timer);
-                Buttons[0].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
-                Buttons[1].transform.DOScale(new Vector3(1, 1, 1), timer);
-                Buttons[2].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
-                Buttons[3].transform.DOScale(new Vector3(1, 1, 1), timer);
-                Buttons[4].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
-                Buttons[5].transform.DOScale(new Vector3(1, 1, 1), timer);
+                if (playerLevelScene.levelUnlock % 2 == 0)
+                {
+                    selected = 1;
+
+                    var sel = playerLevelScene.levelUnlock;
+                    if (playerLevelScene.levelUnlock >= 1)
+                        sel = 1;
+                    if (playerLevelScene.levelUnlock >= 3)
+                        sel = 2;
+                    if (playerLevelScene.levelUnlock >= 5)
+                        sel = 3;
+
+                    switch (sel)
+                    {
+                        default:
+                            break;
+                        case 1:
+                            playerLevelScene.arrow.transform.DOMove(new Vector3(1380, 795, 10), timer);
+                            Buttons[0].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[1].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            break;
+                        case 2:
+                            playerLevelScene.arrow.transform.DOMove(new Vector3(1380, 795, 10), timer);
+                            Buttons[0].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[1].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[2].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[3].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            break;
+                        case 3:
+                            playerLevelScene.arrow.transform.DOMove(new Vector3(1380, 795, 10), timer);
+                            Buttons[0].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[1].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[2].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[3].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            Buttons[4].transform.DOScale(new Vector3(1.1f, 1.1f, 1), timer);
+                            Buttons[5].transform.DOScale(new Vector3(1, 1, 1), timer);
+                            break;
+                    }
+                }
             }
         }
 
@@ -137,17 +183,28 @@ public class SelectLevel : MonoBehaviour
         slider.SetActive(true);
         yield return new WaitForSeconds(2);
 
-        if (switchLevel == 1)
-            SceneManager.LoadScene(2);
-        if (switchLevel == 2)
-            SceneManager.LoadScene(3);
-        if (switchLevel == 3)
-            SceneManager.LoadScene(4);
-        if (switchLevel == 4)
-            SceneManager.LoadScene(5);
-        if (switchLevel == 5)
-            SceneManager.LoadScene(6);
-        if (switchLevel == 6)
-            SceneManager.LoadScene(7);
+        switch (switchLevel)
+        {
+            default:
+                break;
+            case 1:
+                SceneManager.LoadScene(2);
+                break;
+            case 2:
+                SceneManager.LoadScene(3);
+                break;
+            case 3:
+                SceneManager.LoadScene(4);
+                break;
+            case 4:
+                SceneManager.LoadScene(5);
+                break;
+            case 5:
+                SceneManager.LoadScene(6);
+                break;
+            case 6:
+                SceneManager.LoadScene(7);
+                break;
+        }
     }
 }
