@@ -31,13 +31,6 @@ public class PlayerLevelScene : MonoBehaviour
     {
         levelUnlock = GameData.levelUnlock;
 
-        if (levelUnlock == 2)
-            GameData.actualPos = 3;
-        if (levelUnlock == 3 || levelUnlock == 4)
-            GameData.actualPos = 4;
-        if (levelUnlock == 5 || levelUnlock == 6)
-            GameData.actualPos = 5;
-
         actualPos = GameData.actualPos;
     }
     private void Start()

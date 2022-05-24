@@ -188,21 +188,27 @@ public class SelectLevel : MonoBehaviour
             default:
                 break;
             case 1:
+                GameData.actualPos = playerLevelScene.actualPos;
                 SceneManager.LoadScene(2);
                 break;
             case 2:
+                GameData.actualPos = playerLevelScene.actualPos;
                 SceneManager.LoadScene(3);
                 break;
             case 3:
+                GameData.actualPos = playerLevelScene.actualPos;
                 SceneManager.LoadScene(4);
                 break;
             case 4:
+                GameData.actualPos = playerLevelScene.actualPos;
                 SceneManager.LoadScene(5);
                 break;
             case 5:
+                GameData.actualPos = playerLevelScene.actualPos;
                 SceneManager.LoadScene(6);
                 break;
             case 6:
+                GameData.actualPos = playerLevelScene.actualPos;
                 SceneManager.LoadScene(7);
                 break;
         }
