@@ -16,9 +16,10 @@ public class PlayerLevelScene : MonoBehaviour
     public GameObject slider;
 
     public int levelUnlock;
+    public bool selec;
 
-    public GameObject cacheUISdb;
-    public GameObject cacheUIBiblio;
+    public GameObject cacheSdb;
+    public GameObject cacheBiblio;
 
     public GameObject UISalon;
     public GameObject UISdb;
@@ -161,30 +162,37 @@ public class PlayerLevelScene : MonoBehaviour
         #endregion
 
         #region UISelection
-
+        
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             UIBiblio.SetActive(false);
             UISalon.SetActive(false);
             UISdb.SetActive(false);
             canMove = true;
+            selec = false;
         }
+
+        if (levelUnlock >= 3)
+            cacheSdb.SetActive(false);
+        if(levelUnlock >= 5)
+            cacheBiblio.SetActive(false);
 
         if (actualPos == 1 && canMove == true && levelUnlock >= 5 && Input.GetKeyDown(KeyCode.Return))
         {
+            selec = true;
             canMove = false;
-            cacheUIBiblio.SetActive(false);
             UIBiblio.SetActive(true);
         }
         if (actualPos == 3 && canMove == true && Input.GetKeyDown(KeyCode.Return))
         {
+            selec = true;
             canMove = false;
             UISalon.SetActive(true);
         }
         if (actualPos == 4 && canMove == true && levelUnlock >= 3 && Input.GetKeyDown(KeyCode.Return))
         {
+            selec = true;
             canMove = false;
-            cacheUISdb.SetActive(false);
             UISdb.SetActive(true);
         }
         #endregion
