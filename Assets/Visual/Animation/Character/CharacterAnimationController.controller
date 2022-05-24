@@ -617,7 +617,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Push
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3777775435997868462}
@@ -633,7 +633,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 05c40bc7cac8088449d7844fdb1af301, type: 3}
+  m_Motion: {fileID: -203655887218126122, guid: 4ca7609ff0f9efc4ea842edcc2fc27de, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
