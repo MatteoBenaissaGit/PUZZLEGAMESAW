@@ -2024,6 +2024,7 @@ MonoBehaviour:
   slider: {fileID: 591298383}
   levelUnlock: 0
   selec: 0
+  canPick: 0
   cacheSdb: {fileID: 58458784}
   cacheBiblio: {fileID: 668125466}
   UISalon: {fileID: 1184122614}
@@ -3294,6 +3295,8 @@ MonoBehaviour:
   - {fileID: 1277511651}
   selected: 0
   timer: 0.3
+  slider: {fileID: 591298383}
+  switchLevel: 0
 --- !u!1001 &973263914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6396,7 +6399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1782838062
 RectTransform:
   m_ObjectHideFlags: 0

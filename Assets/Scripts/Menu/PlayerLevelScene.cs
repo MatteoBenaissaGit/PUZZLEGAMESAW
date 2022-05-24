@@ -17,6 +17,7 @@ public class PlayerLevelScene : MonoBehaviour
 
     public int levelUnlock;
     public bool selec;
+    public bool canPick;
 
     public GameObject cacheSdb;
     public GameObject cacheBiblio;
@@ -43,6 +44,9 @@ public class PlayerLevelScene : MonoBehaviour
             levelUnlock++;
         }
         //End
+
+        if (levelUnlock >= 6)
+            levelUnlock = 6;
 
         float step = 3 * Time.deltaTime;
 
@@ -170,6 +174,7 @@ public class PlayerLevelScene : MonoBehaviour
             UISdb.SetActive(false);
             canMove = true;
             selec = false;
+            canPick = false;
         }
 
         if (levelUnlock >= 3)
@@ -182,18 +187,21 @@ public class PlayerLevelScene : MonoBehaviour
             selec = true;
             canMove = false;
             UIBiblio.SetActive(true);
+            StartCoroutine(Picked());
         }
         if (actualPos == 3 && canMove == true && Input.GetKeyDown(KeyCode.Return))
         {
             selec = true;
             canMove = false;
             UISalon.SetActive(true);
+            StartCoroutine(Picked());
         }
         if (actualPos == 4 && canMove == true && levelUnlock >= 3 && Input.GetKeyDown(KeyCode.Return))
         {
             selec = true;
             canMove = false;
             UISdb.SetActive(true);
+            StartCoroutine(Picked());
         }
         #endregion
     }
@@ -205,23 +213,17 @@ public class PlayerLevelScene : MonoBehaviour
         actu2 = false;
     }
 
+    IEnumerator Picked()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canPick = true;
+    }
+
     IEnumerator Waiting()
     {
         yield return new WaitForSeconds(1.5f);
         canMove = true;
         _anim.SetBool("isMouving", false);
-    }
-
-    IEnumerator Switch()
-    {
-        slider.SetActive(true);
-        yield return new WaitForSeconds(2);
-        if(actualPos == 1)
-            SceneManager.LoadScene(2);
-        if (actualPos == 3)
-            SceneManager.LoadScene(2);
-        if (actualPos == 4)
-            SceneManager.LoadScene(2);
     }
     #endregion
 }
