@@ -50,7 +50,9 @@ public class SelectLevel : MonoBehaviour
 
         if(playerLevelScene.selec == true)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            var hor = Input.GetAxis("Horizontal");
+
+            if (Input.GetKeyDown(KeyCode.RightArrow) || hor > 0.5)
             {
                 if(playerLevelScene.levelUnlock % 2 == 0)
                 {
@@ -92,7 +94,7 @@ public class SelectLevel : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || hor < -0.5)
             {
                 if (playerLevelScene.levelUnlock % 2 == 0)
                 {
@@ -138,17 +140,17 @@ public class SelectLevel : MonoBehaviour
 
         if(selected == 1)
         {
-            if(playerLevelScene.actualPos == 1 && playerLevelScene.levelUnlock >= 5 && Input.GetKeyDown(KeyCode.Return) && playerLevelScene.canPick == true)
+            if(playerLevelScene.actualPos == 1 && playerLevelScene.levelUnlock >= 5 && SelectButton() && playerLevelScene.canPick == true)
             {
                 switchLevel = 5;
                 StartCoroutine(Switch());
             }
-            if (playerLevelScene.actualPos == 3 && Input.GetKeyDown(KeyCode.Return) && playerLevelScene.canPick == true)
+            if (playerLevelScene.actualPos == 3 && SelectButton() && playerLevelScene.canPick == true)
             {
                 switchLevel = 1;
                 StartCoroutine(Switch());
             }
-            if (playerLevelScene.actualPos == 4 && playerLevelScene.levelUnlock >= 3 && Input.GetKeyDown(KeyCode.Return) && playerLevelScene.canPick == true)
+            if (playerLevelScene.actualPos == 4 && playerLevelScene.levelUnlock >= 3 && SelectButton() && playerLevelScene.canPick == true)
             {
                 switchLevel = 3;
                 StartCoroutine(Switch());
@@ -156,17 +158,17 @@ public class SelectLevel : MonoBehaviour
         }
         if (selected == 2)
         {
-            if (playerLevelScene.actualPos == 1 && playerLevelScene.levelUnlock >= 6 && Input.GetKeyDown(KeyCode.Return) && playerLevelScene.canPick == true)
+            if (playerLevelScene.actualPos == 1 && playerLevelScene.levelUnlock >= 6 && SelectButton() && playerLevelScene.canPick == true)
             {
                 switchLevel = 6;
                 StartCoroutine(Switch());
             }
-            if (playerLevelScene.actualPos == 3 && playerLevelScene.levelUnlock >= 2 && Input.GetKeyDown(KeyCode.Return) && playerLevelScene.canPick == true)
+            if (playerLevelScene.actualPos == 3 && playerLevelScene.levelUnlock >= 2 && SelectButton() && playerLevelScene.canPick == true)
             {
                 switchLevel = 2;
                 StartCoroutine(Switch());
             }
-            if (playerLevelScene.actualPos == 4 && playerLevelScene.levelUnlock >= 4 && Input.GetKeyDown(KeyCode.Return) && playerLevelScene.canPick == true)
+            if (playerLevelScene.actualPos == 4 && playerLevelScene.levelUnlock >= 4 && SelectButton() && playerLevelScene.canPick == true)
             {
                 switchLevel = 4;
                 StartCoroutine(Switch());
@@ -212,5 +214,12 @@ public class SelectLevel : MonoBehaviour
                 SceneManager.LoadScene(7);
                 break;
         }
+    }
+
+    bool SelectButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("ButtonActivation"))
+            return true;
+        else return false;
     }
 }

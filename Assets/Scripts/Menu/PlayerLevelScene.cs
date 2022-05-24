@@ -42,6 +42,9 @@ public class PlayerLevelScene : MonoBehaviour
 
     void Update()
     {
+        var hor = Input.GetAxis("Horizontal");
+        var ver = Input.GetAxis("Vertical");
+
         //For test
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -59,7 +62,7 @@ public class PlayerLevelScene : MonoBehaviour
 
         if (actualPos == 0)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow) && canMove == true)
+            if (Right(hor) && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -70,7 +73,7 @@ public class PlayerLevelScene : MonoBehaviour
         }
         if (actualPos == 1)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && canMove == true)
+            if (Up(ver) && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -81,7 +84,7 @@ public class PlayerLevelScene : MonoBehaviour
                 StartCoroutine(Waiting());
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && canMove == true)
+            if (Left(hor) && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -92,7 +95,7 @@ public class PlayerLevelScene : MonoBehaviour
         }
         if (actualPos == 2)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && canMove == true)
+            if (Left(hor) && canMove == true)
             {
                 canMove = false;
                 actu2 = false;
@@ -102,7 +105,7 @@ public class PlayerLevelScene : MonoBehaviour
                 StartCoroutine(Waiting());
             }
 
-            if (Input.GetKeyDown(KeyCode.DownArrow) && canMove == true)
+            if (Down(ver) && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -112,7 +115,7 @@ public class PlayerLevelScene : MonoBehaviour
                 StartCoroutine(Waiting());
             }
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) && actu2 == false && canMove == true)
+            if (Up(ver) && actu2 == false && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -124,7 +127,7 @@ public class PlayerLevelScene : MonoBehaviour
         }
         if (actualPos == 3)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow) && canMove == true)
+            if (Right(hor) && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -133,9 +136,9 @@ public class PlayerLevelScene : MonoBehaviour
                 StartCoroutine(Waiting());
             }
         }
-        if(actualPos == 4)
+        if (actualPos == 4)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow) && canMove == true)
+            if (Down(ver) && canMove == true)
             {
                 canMove = false;
                 _anim.SetBool("isMouving", true);
@@ -171,8 +174,8 @@ public class PlayerLevelScene : MonoBehaviour
         #endregion
 
         #region UISelection
-        
-        if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("ButtonEscape") )
         {
             UIBiblio.SetActive(false);
             UISalon.SetActive(false);
@@ -185,10 +188,10 @@ public class PlayerLevelScene : MonoBehaviour
 
         if (levelUnlock >= 3)
             cacheSdb.SetActive(false);
-        if(levelUnlock >= 5)
+        if (levelUnlock >= 5)
             cacheBiblio.SetActive(false);
 
-        if (actualPos == 1 && canMove == true && levelUnlock >= 5 && Input.GetKeyDown(KeyCode.Return))
+        if (actualPos == 1 && canMove == true && levelUnlock >= 5 && SelectButton())
         {
             selec = true;
             canMove = false;
@@ -196,7 +199,7 @@ public class PlayerLevelScene : MonoBehaviour
             arrow.SetActive(true);
             StartCoroutine(Picked());
         }
-        if (actualPos == 3 && canMove == true && Input.GetKeyDown(KeyCode.Return))
+        if (actualPos == 3 && canMove == true && SelectButton())
         {
             selec = true;
             canMove = false;
@@ -204,7 +207,7 @@ public class PlayerLevelScene : MonoBehaviour
             arrow.SetActive(true);
             StartCoroutine(Picked());
         }
-        if (actualPos == 4 && canMove == true && levelUnlock >= 3 && Input.GetKeyDown(KeyCode.Return))
+        if (actualPos == 4 && canMove == true && levelUnlock >= 3 && SelectButton())
         {
             selec = true;
             canMove = false;
@@ -235,4 +238,34 @@ public class PlayerLevelScene : MonoBehaviour
         _anim.SetBool("isMouving", false);
     }
     #endregion
+    bool SelectButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("ButtonActivation"))
+            return true;
+        else return false;
+    }
+    bool Up(float axis)
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || axis > 0.5f)
+            return true;
+        else return false;
+    }
+    bool Down(float axis)
+    {
+        if (Input.GetKeyDown(KeyCode.DownArrow) || axis < -0.5f)
+            return true;
+        else return false;
+    }
+    bool Left(float axis)
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || axis < -0.5f)
+            return true;
+        else return false;
+    }
+    bool Right(float axis)
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow) || axis > 0.5f)
+            return true;
+        else return false;
+    }
 }
