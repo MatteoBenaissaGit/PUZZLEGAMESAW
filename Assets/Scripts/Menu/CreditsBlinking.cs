@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CreditsBlinking : MonoBehaviour
 {
-    bool fade;
+    bool _fade;
     public GameObject fader;
+    public GameObject panel;
+
+    public bool canSwitch;
+    public GameObject buttonBack;
 
     private void Start()
     {
@@ -15,14 +19,30 @@ public class CreditsBlinking : MonoBehaviour
 
     private void Update()
     {
-        if (fade)
+        if (_fade)
+        {
+            _fade = false;
             fader.SetActive(true);
+            panel.SetActive(true);
+            StartCoroutine(Waiting2());
+        }
+
+        if (canSwitch)
+        {
+            buttonBack.SetActive(true);
+        }
+    }
+
+    IEnumerator Waiting2()
+    {
+        yield return new WaitForSeconds(4);
+        canSwitch = true;
     }
 
     IEnumerator Waiting()
     {
         yield return new WaitForSeconds(30);
-        fade = true;
+        _fade = true;
     }
     IEnumerator Blink()
     {
