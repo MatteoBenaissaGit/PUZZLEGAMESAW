@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
+
 public class CreditsBlinking : MonoBehaviour
 {
     bool _fade;
@@ -11,8 +14,12 @@ public class CreditsBlinking : MonoBehaviour
     public bool canSwitch;
     public GameObject buttonBack;
 
+    AudioSource audioData;
+
     private void Start()
     {
+        audioData = GetComponent<AudioSource>();
+        audioData.Play(0);
         StartCoroutine(Blink());
         StartCoroutine(Waiting());
     }
@@ -30,6 +37,7 @@ public class CreditsBlinking : MonoBehaviour
         if (canSwitch)
         {
             buttonBack.SetActive(true);
+            Cursor.visible = true;
         }
     }
 

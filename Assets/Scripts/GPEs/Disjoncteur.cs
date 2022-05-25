@@ -2,19 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class Disjoncteur : ClassActivator
 {
     bool _isTrigger;
     Animator _anim;
     Animator _characterAnim;
     Collider _characterCollider;
-    
+
     [Header("Button&Cam Reference")][Space(10)]
     public GameObject ButtonImage;
     public Transform Camera;
 
+    AudioSource audioData;
+
     private void Start()
     {
+        audioData = GetComponent<AudioSource>();
         _anim = GetComponent<Animator>();
         _characterAnim = Character.GetComponent<Animator>();
         _characterCollider = Character.GetComponent<Collider>();
@@ -47,8 +52,11 @@ public class Disjoncteur : ClassActivator
 
     void PushCheck()
     {
-        if (_isTrigger && (Input.GetButtonDown("ButtonActivation")||Input.GetKeyDown(KeyCode.E)) )
+        if (_isTrigger && (Input.GetButtonDown("ButtonActivation")||Input.GetKeyDown(KeyCode.E)))
+        {
+            audioData.Play(0);
             Pushed();
+        }
     }
 
     void Pushed()
