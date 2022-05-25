@@ -9,7 +9,6 @@ public class TitleBlinking : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Blink2());
-        
     }
     IEnumerator Blink2()
     {
