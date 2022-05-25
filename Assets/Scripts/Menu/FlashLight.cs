@@ -26,11 +26,6 @@ public class FlashLight : MonoBehaviour
         transform.position = mouseWorldPosition;
     }
 
-    IEnumerator Waiting()
-    {
-        yield return new WaitForSeconds(6);
-        
-    }
     IEnumerator Blink()
     {
         yield return new WaitForSeconds(0.5f);
