@@ -57,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     void Inputs()
     {
         //inputs
-        if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Standing"))
+        if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Standing") && !_anim.GetCurrentAnimatorStateInfo(0).IsName("PushButton"))
         {
             _x = Input.GetAxis("Horizontal");
             _y = Input.GetAxis("Vertical");

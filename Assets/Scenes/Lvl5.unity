@@ -1950,6 +1950,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2234390300652904368, guid: 9a188d98d32fbb1499345a68ec50e59a, type: 3}
+      propertyPath: Slider
+      value: 
+      objectReference: {fileID: 1422290461}
     - target: {fileID: 2234390300652904369, guid: 9a188d98d32fbb1499345a68ec50e59a, type: 3}
       propertyPath: PullForce
       value: 0.64
@@ -2685,6 +2689,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e009ec8772e8c64da556da0a6269a07, type: 3}
+--- !u!1 &1422290461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4539295618200100948, guid: 2e009ec8772e8c64da556da0a6269a07, type: 3}
+  m_PrefabInstance: {fileID: 1422290460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1427109971
 GameObject:
   m_ObjectHideFlags: 0
