@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -26,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody _rb;
     Animator _anim;
 
+    AudioSource audioData;
+    public bool _sound = true;
+
     Vector3 _dir = new Vector3();
     float _x, _y, _xy, _currentSpeed;
     bool _push, _pull;
@@ -37,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
         _currentSpeed = MoveSpeed;
+
+        audioData = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -51,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
             Moving();
             Animating();
             Pulling();
+
+            Sound();
         }
     }
 
@@ -60,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
         if (!_anim.GetCurrentAnimatorStateInfo(0).IsName("Standing") && !_anim.GetCurrentAnimatorStateInfo(0).IsName("PushButton"))
         {
             _x = Input.GetAxis("Horizontal");
-            _y = Input.GetAxis("Vertical");
+            _y = Input.GetAxis("Vertical");  
         }
 
         //direction
@@ -74,6 +83,24 @@ public class PlayerMovement : MonoBehaviour
         _dir.Normalize();
     }
 
+    void Sound()
+    {
+        if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
+        {
+            if (_sound)
+            {
+                _sound = false;
+                audioData.Play(0);
+                StartCoroutine(SoundCheck());
+            }
+        }
+    }
+    IEnumerator SoundCheck()
+    {
+        yield return new WaitForSeconds(0.8f);
+        _sound = true;
+    }
+
     void Moving()
     {
         //movement
@@ -82,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         _rb.AddForce(force);
         if (_xy > 0.1f) Mathf.Lerp(_currentSpeed, MoveSpeed, 0.1f);
     }
+
 
     void Animating()
     {

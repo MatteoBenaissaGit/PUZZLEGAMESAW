@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+[RequireComponent(typeof(AudioSource))]
+
 public class PressurePlate : ClassActivator
 {
     [Header("Pressure Plate Parameters")]
@@ -12,10 +14,14 @@ public class PressurePlate : ClassActivator
     bool _isTrigger;
     bool _topContact;
 
+    AudioSource audioData;
+
     private void Start()
     {
         BaseY = transform.position.y;
         IsActive = false;
+
+        audioData = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -50,11 +56,13 @@ public class PressurePlate : ClassActivator
     {
         if (!_isTrigger)
         {
+            audioData.Play(0);
             transform.DOMoveY(BaseY - MovementHeight, MovementDuration);
             _isTrigger = true;
         }
         else
         {
+            audioData.Play(0);
             transform.DOMoveY(BaseY, MovementDuration);
             _isTrigger = false;
         }

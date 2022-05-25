@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[RequireComponent(typeof(AudioSource))]
+
 public class ArrowLauncher : MonoBehaviour
 {
     [HideInInspector] public bool IsTriggered;
@@ -28,11 +31,15 @@ public class ArrowLauncher : MonoBehaviour
     [Range(0.01f, 0.25f)] public float LaserWidth;
     public ColorChoice.HueColorNames LaserColor;
 
+    AudioSource audioData;
+
     private void Start()
     {
         rayDirection = transform.TransformDirection(Vector3.forward + new Vector3(-90, 0, 0));
         _characterCollider = Character.GetComponent<Collider>();
         ArrowLine();
+
+        audioData = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -57,6 +64,7 @@ public class ArrowLauncher : MonoBehaviour
     void LaunchArrow()
     {
         //arrow setup
+        audioData.Play(0);
         GameObject arrow = Instantiate(Arrow);
         arrow.GetComponent<ArrowScript>().MovementSpeed = ArrowSpeed;
         arrow.transform.position = SpawnPoint.transform.position;
