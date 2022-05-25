@@ -10,7 +10,7 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("OpenBook"))
+        if (Input.GetButtonDown("OpenBook") || Input.GetKeyDown(KeyCode.X))
         {
             if (BookUI.active == false)
                 LaunchBookUI();
